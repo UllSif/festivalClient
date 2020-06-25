@@ -1,0 +1,46 @@
+<ng-container>
+  <h2>Ajouter un artiste</h2>
+
+  <form (ngSubmit)="addConcert(form)" #form="ngForm"
+        [class.was-validated]="formSubmitted" *ngIf="concert">
+
+    Date :
+    <div class="form-check form-check-inline">
+
+      <input type="radio" class="form-check-input" name="date" value="2020-06-29"
+             [(ngModel)]="concert.date" #dateInput="ngModel" required>
+      <label class="form-check-label">2020-06-29</label>
+    </div>
+
+      <div class="form-check form-check-inline">
+      <input type="radio" class="form-check-input" name="date" value="2020-06-30"
+             [(ngModel)]="concert.date" #dateInput="ngModel" required>
+      <label class="form-check-label">2020-06-30</label>
+    </div>
+
+    <div class="form-group">
+      <label>Heure</label>
+      <input class="form-control" name="time" type="time"
+                [(ngModel)]="concert.time" #timeInput="ngModel" required>
+    </div>
+
+    <div class="form-group">
+      <label>Durée</label>
+      <input class="form-control" name="duration" type="time"
+             [(ngModel)]="concert.duration" #durationInput="ngModel" required>
+    </div>
+
+    <div class="form-group">
+      <label>Artiste</label>
+      <select class="form-control" [(ngModel)]="concert.artist" name="artist">
+        <option></option>
+        <option *ngFor="let artist of artists" [value]="artist.id">{{artist.name}}</option>
+      </select>
+    </div>
+
+    <button class="btn btn-outline-primary">Valider</button>
+  </form>
+
+</ng-container>
+
+{{concert | json}}

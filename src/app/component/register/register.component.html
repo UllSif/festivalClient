@@ -1,0 +1,66 @@
+<h2>Devenir bénévole</h2>
+<p>Devenir bénévole vous permettra d'obtenir des informations complémentaires sur le festival</p>
+<form (ngSubmit)="register(form)" #form="ngForm">
+
+  <div class="form-group">
+    <label>Email</label>
+    <input type="text" class="form-control"
+           [(ngModel)]="user.username"
+           #usernameInput="ngModel"
+           required name="username">
+    <p class="text-danger" *ngIf="usernameInput.dirty && usernameInput.invalid">
+      Ce champ doit être renseigné
+    </p>
+  </div>
+
+  <div class="form-group">
+    <label>Mot de passe</label>
+    <input type="text" class="form-control"
+           [(ngModel)]="user.password"
+           required name="password" #passwordInput="ngModel">
+    <p class="text-danger" *ngIf="passwordInput.dirty && passwordInput.invalid">
+      Ce champ doit être renseigné
+    </p>
+  </div>
+
+  <div class="form-group">
+    <label>Prénom</label>
+    <input type="text" class="form-control"
+           [(ngModel)]="user.firstname"
+           required name="firstname" #firstnameInput="ngModel">
+    <p class="text-danger" *ngIf="firstnameInput.dirty && firstnameInput.invalid">
+      Ce champ doit être renseigné
+    </p>
+  </div>
+
+  <div class="form-group">
+    <label>Nom</label>
+    <input type="text" class="form-control"
+           [(ngModel)]="user.lastname"
+           required name="lastname" #lastnameInput="ngModel">
+    <p class="text-danger" *ngIf="lastnameInput.dirty && lastnameInput.invalid">
+      Ce champ doit être renseigné
+    </p>
+  </div>
+
+  <div class="form-group">
+    <label>Date de naissance</label>
+    <input type="date" class="form-control"
+           [(ngModel)]="user.birthdate"
+           required name="birthdate">
+  </div>
+
+  <div class="form-group">
+    <label>Téléphone</label>
+    <input type="number" class="form-control"
+           [(ngModel)]="user.phone"
+           required name="phone" #phoneInput="ngModel">
+    <p class="text-danger" *ngIf="phoneInput.dirty && phoneInput.invalid">
+      Ce champ doit être renseigné
+    </p>
+  </div>
+
+  <button>Valider</button>
+</form>
+
+{{user | json}}

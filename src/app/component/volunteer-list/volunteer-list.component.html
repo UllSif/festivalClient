@@ -1,0 +1,22 @@
+<h2>Liste des bénévoles</h2>
+
+<ng-container *ngIf="users">
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Email</th>
+      <th>Nom</th>
+      <th>Date de naissance</th>
+      <th>Téléhpone</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.username}}</td>
+      <td>{{user.firstname}} {{user.lastname}}</td>
+      <td>{{user.birthdate}}</td>
+      <td>{{user.phone}}</td>
+    </tr>
+    </tbody>
+  </table>
+</ng-container>

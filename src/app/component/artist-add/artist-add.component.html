@@ -1,0 +1,22 @@
+<ng-container>
+  <h2>Ajouter un artiste</h2>
+
+  <form (ngSubmit)="addArtist(form)" #form="ngForm" [class.was-validated]="formSubmitted" *ngIf="artist">
+
+    <div class="form-group">
+      <label>Nom de l'artiste</label>
+      <input type="text" class="form-control" name="name"
+             [(ngModel)]="artist.name" #nameInput="ngModel" required>
+    </div>
+
+    <div class="form-group">
+      <label>Biographie</label>
+      <textarea class="form-control" name="biography"
+                [(ngModel)]="artist.biography" #biographyInput="ngModel" required></textarea>
+    </div>
+
+    <button class="btn btn-outline-primary">Valider</button>
+
+  </form>
+
+</ng-container>

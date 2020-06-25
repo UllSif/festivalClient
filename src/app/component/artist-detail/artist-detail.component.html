@@ -1,0 +1,16 @@
+<div class="row text-center" *ngIf="artist">
+  <div class="col-12">
+    <h2>{{artist.name}}</h2>
+  </div>
+  <div class="col-4 offset-4">
+    {{artist.biography}}
+  </div>
+
+  <div class="col-12" *ngFor="let concert of artist.concerts">
+    {{concert.date}}
+  </div>
+
+  <a class="btn btn-primary" routerLink="/artist-edit/{{artist.id}}">Modifier</a>
+</div>
+
+

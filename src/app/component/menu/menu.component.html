@@ -1,0 +1,28 @@
+<nav class="nav nav-pills nav-justified mt-3 pb-md-4">
+  <a class="nav-item nav-link" routerLink="/home"
+     routerLinkActive="active">Accueil</a>
+
+  <a class="nav-item nav-link" routerLink="/program" routerLinkActive="active">Programme</a>
+
+  <a class="nav-item nav-link" routerLink="/artist-list" routerLinkActive="active">Artistes</a>
+
+  <a class="nav-item nav-link" routerLink="/register" routerLinkActive="active" *ngIf="!isConnected">Devenir bénévoles</a>
+
+  <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active" *ngIf="!isConnected">Se connecter</a>
+
+  <ng-container *ngIf="isConnected">
+    <a class="nav-item nav-link" routerLink="/volunteer-informations" routerLinkActive="active">Informations pour les bénévoles</a>
+  </ng-container>
+
+  <ng-container *ngIf="isConnected">
+    <a class="nav-item nav-link" routerLink="/volunteer-list" routerLinkActive="active">Liste des bénévoles</a>
+  </ng-container>
+
+  <ng-container *ngIf="isConnected">
+    <p class="nav-item nav-link">{{user.username}} est connecté</p>
+  </ng-container>
+
+  <ng-container *ngIf="isConnected">
+    <a class="nav-item nav-link log-out" (click)="logOut()" routerLinkActive="active">Se déconnecter</a>
+  </ng-container>
+</nav>
