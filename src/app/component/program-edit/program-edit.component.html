@@ -1,5 +1,8 @@
-<ng-container>
-  <h2>Modifier un concert</h2>
+<ng-container *ngIf="!loading">
+
+  <div class="col-12 mb-5">
+    <h2>Modifier un concert</h2>
+  </div>
 
   <form (ngSubmit)="editConcert(form)" #form="ngForm"
         [class.was-validated]="formSubmitted" *ngIf="concert">
@@ -21,13 +24,15 @@
     <div class="form-group">
       <label>Heure</label>
       <input class="form-control" name="time" type="time"
-             [(ngModel)]="concert.time" #timeInput="ngModel" required>
+             [(ngModel)]="concert.time" #timeInput="ngModel" required
+             min="11:00" max="18:00">
     </div>
 
     <div class="form-group">
       <label>Durée</label>
       <input class="form-control" name="duration" type="time"
-             [(ngModel)]="concert.duration" #durationInput="ngModel" required>
+             [(ngModel)]="concert.duration" #durationInput="ngModel" required
+             min="00:30" max="02:00">
     </div>
 
     <div class="form-group">

@@ -11,14 +11,14 @@
   <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active" *ngIf="!isConnected">Se connecter</a>
 
   <ng-container *ngIf="isConnected">
-    <a class="nav-item nav-link" routerLink="/volunteer-informations" routerLinkActive="active">Informations pour les bénévoles</a>
+    <a class="nav-item nav-link" routerLink="/volunteer-informations" routerLinkActive="active">Informations bénévoles</a>
   </ng-container>
 
   <ng-container *ngIf="isConnected">
     <a class="nav-item nav-link" routerLink="/volunteer-list" routerLinkActive="active">Liste des bénévoles</a>
   </ng-container>
 
-  <ng-container *ngIf="isConnected">
+  <ng-container *ngIf="isConnected && user">
     <p class="nav-item nav-link">{{user.username}} est connecté</p>
   </ng-container>
 

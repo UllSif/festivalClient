@@ -1,22 +1,31 @@
-<h2>Liste des bénévoles</h2>
+<ng-container *ngIf="!loading">
 
-<ng-container *ngIf="users">
-  <table class="table table-bordered">
-    <thead>
-    <tr>
-      <th>Email</th>
-      <th>Nom</th>
-      <th>Date de naissance</th>
-      <th>Téléhpone</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{user.username}}</td>
-      <td>{{user.firstname}} {{user.lastname}}</td>
-      <td>{{user.birthdate}}</td>
-      <td>{{user.phone}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="col-12 text-center mb-5">
+    <h2>Liste des bénévoles</h2>
+  </div>
+
+  <div *ngIf="users" class="col-md-12">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Nom</th>
+        <th>Date de naissance</th>
+        <th>Téléphone</th>
+        <th>Accès</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.id}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.firstname}} {{user.lastname}}</td>
+        <td>{{user.birthdate | date:'dd-MM-yyyy'}}</td>
+        <td>{{user.phone}}</td>
+        <td>{{user.roles}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </ng-container>

@@ -1,15 +1,27 @@
-<h2>Se connecter</h2>
+<div class="col mb-5">
+  <h2>Se connecter</h2>
+</div>
 
-<form (ngSubmit)="login()">
+<form (ngSubmit)="login(form)" #form="ngForm" [class.was-validated]="formSubmitted">
 
   <div class="form-group">
     <label>Email</label>
-    <input type="text" class="form-control" [(ngModel)]="username" name="username">
+    <input type="text" class="form-control"
+           [(ngModel)]="username" #usernameInput="ngModel"
+           name="username" required>
+    <p class="text-danger" *ngIf="usernameInput.dirty && usernameInput.invalid">
+      Ce champ est obligatoire
+    </p>
   </div>
 
   <div class="form-group">
     <label>Mot de passe</label>
-    <input type="text" class="form-control" [(ngModel)]="password" name="password">
+    <input type="text" class="form-control"
+           [(ngModel)]="password" #passwordInput="ngModel"
+           name="password" required>
+    <p class="text-danger" *ngIf="passwordInput.dirty && passwordInput.invalid">
+      Ce champ est obligatoire
+    </p>
   </div>
 
   <div class="error-message" *ngIf="errorMessage">

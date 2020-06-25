@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {LoadingService} from "../service/loading.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  constructor(private loadingService: LoadingService) {
+
+  }
+
+  get loading() {
+    return this.loadingService.isLoading();
+  }
 }

@@ -3,6 +3,8 @@ import {ArtistService} from "../../service/artist.service";
 import {Router} from "@angular/router";
 import {Artist} from "../../entity/artist.entity";
 import {NgForm} from "@angular/forms";
+import Swal from "sweetalert2";
+import {LoadingService} from "../../service/loading.service";
 
 @Component({
   selector: 'app-artist-add',
@@ -12,17 +14,18 @@ import {NgForm} from "@angular/forms";
 export class ArtistAddComponent implements OnInit {
 
   artist: Artist = new Artist();
-
   formSubmitted = false;
 
   constructor(private artistService: ArtistService,
-              private router: Router) {
+              private router: Router,
+              private loadingService: LoadingService) {
   }
 
   ngOnInit(): void {
   }
 
   addArtist(form: NgForm) {
+    this.loadingService.showLoading()
     this.formSubmitted = true;
 
     if (form.invalid) {
@@ -30,6 +33,8 @@ export class ArtistAddComponent implements OnInit {
     }
 
     this.artistService.addArtist(this.artist).subscribe(() => {
+      this.loadingService.hideLoading();
+      Swal.fire("L'artiste a bien été ajouté. Retour à la liste");
       this.router.navigate(['/artist-list']);
     })
   }

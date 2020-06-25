@@ -29,6 +29,6 @@ export class ArtistService {
   }
 
   deleteArtiste(id: number) {
-    return this.http.delete(environment.apiPrefix + '/artist' + id)
+    return this.http.delete(environment.apiPrefix + '/artist/' + id)
   }
 }

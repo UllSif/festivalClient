@@ -3,6 +3,8 @@ import {User} from "../../entity/user.entity";
 import {UserService} from "../../service/user.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import Swal from 'sweetalert2';
+import {LoadingService} from "../../service/loading.service";
 
 @Component({
   selector: 'app-register',
@@ -13,22 +15,30 @@ export class RegisterComponent implements OnInit {
 
   user: User = new User()
 
-  constructor(private userService: UserService, private router: Router) {
+  formSubmitted = false;
+
+  constructor(private userService: UserService,
+              private router: Router,
+              private loadingService: LoadingService) {
   }
 
   ngOnInit(): void {
   }
 
   register(form: NgForm) {
+    this.formSubmitted = true;
+
     if (form.invalid) {
       return;
     }
 
     this.userService.addUser(this.user).subscribe(() => {
-      this.router.navigate(['/login']);
+        Swal.fire('Votre compte a bien été créé. Veuillez vous connecter');
+        this.router.navigate(['/login']);
       },
       error => {
         console.error(error);
+        this.loadingService.hideLoading();
       })
   }
 }

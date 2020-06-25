@@ -1,16 +1,16 @@
-<div class="row text-center" *ngIf="artist">
-  <div class="col-12">
+<ng-container *ngIf="!loading">
+<div class="row" *ngIf="artist">
+  <div class="col-12 text-center">
     <h2>{{artist.name}}</h2>
   </div>
-  <div class="col-4 offset-4">
+  <div class="col-12 text-center mt-3">
     {{artist.biography}}
   </div>
 
-  <div class="col-12" *ngFor="let concert of artist.concerts">
-    {{concert.date}}
+  <div class="col-12 text-center mt-3" *ngFor="let concert of artist.concerts">
+    <b>Prochains concerts : {{concert.date}}</b>
   </div>
 
-  <a class="btn btn-primary" routerLink="/artist-edit/{{artist.id}}">Modifier</a>
+  <a *ngIf="isConnected" class="btn btn-primary" routerLink="/artist-edit/{{artist.id}}">Modifier</a>
 </div>
-
-
+</ng-container>
