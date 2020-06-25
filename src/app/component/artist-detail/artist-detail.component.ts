@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ArtistService} from "../../service/artist.service";
 import {ActivatedRoute} from "@angular/router";
 import {Artist} from "../../entity/artist.entity";
-import {Concert} from "../../entity/concert.entity";
 import {ConcertService} from "../../service/concert.service";
 import {SecurityService} from "../../service/security.service";
 import {LoadingService} from "../../service/loading.service";
@@ -17,20 +16,20 @@ export class ArtistDetailComponent implements OnInit {
   artist: Artist;
   artistId;
 
-
   constructor(private artistService: ArtistService,
               private concertService: ConcertService,
-              private securityService:SecurityService,
+              private securityService: SecurityService,
               private route: ActivatedRoute,
-              private loadingService:LoadingService) { }
+              private loadingService: LoadingService) {
+  }
 
   ngOnInit(): void {
     this.loadingService.showLoading();
     this.artistId = this.route.snapshot.paramMap.get('id');
     this.artistService.getOneArtist(this.artistId).subscribe(value => {
-      this.artist = value;
-      this.loadingService.hideLoading()
-    },
+        this.artist = value;
+        this.loadingService.hideLoading()
+      },
       error => {
         console.error(error);
         this.loadingService.hideLoading();

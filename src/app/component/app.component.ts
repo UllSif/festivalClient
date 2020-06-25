@@ -9,7 +9,6 @@ import {LoadingService} from "../service/loading.service";
 export class AppComponent {
 
   constructor(private loadingService: LoadingService) {
-
   }
 
   get loading() {
