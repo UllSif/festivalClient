@@ -1,29 +1,30 @@
-<div class="col-12 mb-5">
+<div class="col-12 mb-4 text-center">
   <h2>Modifier un artiste</h2>
 </div>
 <ng-container *ngIf="!loading">
   <form (ngSubmit)="editArtist(form)" #form="ngForm" [class.was-validated]="formSubmitted" *ngIf="artist">
+    <div class="col-4 offset-4">
+      <div class="form-group">
+        <label>Nom de l'artiste</label>
+        <input type="text" class="form-control" name="name"
+               [(ngModel)]="artist.name" #nameInput="ngModel" required>
+        <p class="text-danger" *ngIf="nameInput.dirty && nameInput.invalid">
+          Ce champ doit être renseigné
+        </p>
+      </div>
 
-    <div class="form-group">
-      <label>Nom de l'artiste</label>
-      <input type="text" class="form-control" name="name"
-             [(ngModel)]="artist.name" #nameInput="ngModel" required>
-      <p class="text-danger" *ngIf="nameInput.dirty && nameInput.invalid">
-        Ce champ doit être renseigné
-      </p>
+      <div class="form-group">
+        <label>Biographie</label>
+        <textarea class="form-control" name="biography"
+                  [(ngModel)]="artist.biography" #biographyInput="ngModel" required></textarea>
+        <p class="text-danger" *ngIf="biographyInput.dirty && biographyInput.invalid">
+          Ce champ doit être renseigné
+        </p>
+      </div>
+
+      <button class="btn btn-success">Valider</button>
+      <button class="btn btn-danger float-right" type="button" (click)="deleteArtist()">Supprimer</button>
     </div>
-
-    <div class="form-group">
-      <label>Biographie</label>
-      <textarea class="form-control" name="biography"
-                [(ngModel)]="artist.biography" #biographyInput="ngModel" required></textarea>
-      <p class="text-danger" *ngIf="biographyInput.dirty && biographyInput.invalid">
-        Ce champ doit être renseigné
-      </p>
-    </div>
-
-    <button class="btn btn-primary">Valider</button>
-    <button class="btn btn-danger float-right" type="button" (click)="deleteArtist()">Supprimer</button>
   </form>
 
 </ng-container>

@@ -10,13 +10,11 @@ import {User} from "../../entity/user.entity";
 })
 export class MenuComponent implements OnInit {
 
-  user: User;
 
   constructor(private securityService: SecurityService, private router: Router) { }
 
   ngOnInit(): void {
     this.securityService.restoreConnection();
-    this.user = this.securityService.getCurrentUser();
   }
 
   get isConnected() {
@@ -28,4 +26,7 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  get currentUser(): User {
+    return this.securityService.getCurrentUser();
+  }
 }

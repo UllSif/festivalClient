@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import Swal from "sweetalert2";
 import {LoadingService} from "../../service/loading.service";
+import {ConcertService} from "../../service/concert.service";
 
 @Component({
   selector: 'app-artist-edit',
@@ -19,6 +20,7 @@ export class ArtistEditComponent implements OnInit {
   formSubmitted = false;
 
   constructor(private artistService: ArtistService,
+              private concertService: ConcertService,
               private route: ActivatedRoute,
               private router: Router,
               private loadingService: LoadingService) {
@@ -90,7 +92,13 @@ export class ArtistEditComponent implements OnInit {
           Swal.fire('Vous ne disposez pas des accès pour supprimer un artiste.');
           this.router.navigate(['/artist-list']);
           this.loadingService.hideLoading();
-        } else {
+        } else if (error.status == 500) {
+          console.error(error);
+          Swal.fire("Vous devez supprimer les concerts de l'artiste avant de supprimer l'artiste lui même...");
+          this.router.navigate(['/program']);
+          this.loadingService.hideLoading();
+        }
+        else {
           console.error(error);
           Swal.fire("Une erreur s'est produite. Retour à la liste.");
           this.router.navigate(['/artist-list']);

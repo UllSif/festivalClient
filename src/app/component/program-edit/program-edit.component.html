@@ -1,50 +1,52 @@
 <ng-container *ngIf="!loading">
 
-  <div class="col-12 mb-5">
+  <div class="col-12 mb-4 text-center">
     <h2>Modifier un concert</h2>
   </div>
 
+
   <form (ngSubmit)="editConcert(form)" #form="ngForm"
         [class.was-validated]="formSubmitted" *ngIf="concert">
+    <div class="col-4 offset-4">
+      Date :
+      <div class="form-check form-check-inline">
 
-    Date :
-    <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" name="date" value="2020-06-29"
+               [(ngModel)]="concert.date" #dateInput="ngModel" required>
+        <label class="form-check-label">2020-06-29</label>
+      </div>
 
-      <input type="radio" class="form-check-input" name="date" value="2020-06-29"
-             [(ngModel)]="concert.date" #dateInput="ngModel" required>
-      <label class="form-check-label">2020-06-29</label>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" name="date" value="2020-06-30"
+               [(ngModel)]="concert.date" #dateInput="ngModel" required>
+        <label class="form-check-label">2020-06-30</label>
+      </div>
+
+      <div class="form-group">
+        <label>Heure</label>
+        <input class="form-control" name="time" type="time"
+               [(ngModel)]="concert.time" #timeInput="ngModel" required
+               min="11:00" max="23:00">
+      </div>
+
+      <div class="form-group">
+        <label>Durée</label>
+        <input class="form-control" name="duration" type="time"
+               [(ngModel)]="concert.duration" #durationInput="ngModel" required
+               min="00:30" max="02:00">
+      </div>
+
+      <div class="form-group">
+        <label>Artiste</label>
+        <select class="form-control" [(ngModel)]="concert.artist" name="artist">
+          <option></option>
+          <option *ngFor="let artist of artists" [value]="artist.id">{{artist.name}}</option>
+        </select>
+      </div>
+
+      <button class="btn btn-success">Valider</button>
+      <button class="btn btn-danger float-right" type="button" (click)="deleteConcert()">Supprimer</button>
     </div>
-
-    <div class="form-check form-check-inline">
-      <input type="radio" class="form-check-input" name="date" value="2020-06-30"
-             [(ngModel)]="concert.date" #dateInput="ngModel" required>
-      <label class="form-check-label">2020-06-30</label>
-    </div>
-
-    <div class="form-group">
-      <label>Heure</label>
-      <input class="form-control" name="time" type="time"
-             [(ngModel)]="concert.time" #timeInput="ngModel" required
-             min="11:00" max="18:00">
-    </div>
-
-    <div class="form-group">
-      <label>Durée</label>
-      <input class="form-control" name="duration" type="time"
-             [(ngModel)]="concert.duration" #durationInput="ngModel" required
-             min="00:30" max="02:00">
-    </div>
-
-    <div class="form-group">
-      <label>Artiste</label>
-      <select class="form-control" [(ngModel)]="concert.artist" name="artist">
-        <option></option>
-        <option *ngFor="let artist of artists" [value]="artist.id">{{artist.name}}</option>
-      </select>
-    </div>
-
-    <button class="btn btn-primary">Valider</button>
-    <button class="btn btn-danger float-right" type="button" (click)="deleteConcert()">Supprimer</button>
   </form>
 
 </ng-container>

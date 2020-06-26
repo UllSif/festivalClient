@@ -35,7 +35,7 @@ export class ArtistListComponent implements OnInit {
       });
   }
 
-  sortArtists() {
+  sortArtistsByName() {
     return this.artists.sort((a, b) => {
       return a.name.localeCompare(b.name);
     });

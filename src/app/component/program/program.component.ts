@@ -43,13 +43,13 @@ export class ProgramComponent implements OnInit {
   getConcertFirstDay(concert) {
     return this.concerts.filter(concert => concert.date === '2020-06-29').sort((a, b) => {
       return a.time.localeCompare(b.time);
-    })
+    });
   }
 
   getConcertSecondDay(concert) {
     return this.concerts.filter(concert => concert.date === '2020-06-30').sort((a, b) => {
       return a.time.localeCompare(b.time);
-    })
+    });
   }
 
   get loading() {

@@ -1,16 +1,23 @@
 <ng-container *ngIf="!loading">
-<div class="row" *ngIf="artist">
-  <div class="col-12 text-center">
-    <h2>{{artist.name}}</h2>
-  </div>
-  <div class="col-12 text-center mt-3">
-    {{artist.biography}}
-  </div>
+  <div class="row text-center" *ngIf="artist">
+    <div>
+      <div class="col-12 mb-4">
+        <h2>{{artist.name}}</h2>
+      </div>
+      <div class="col-6 offset-3 mt-3 mb-4">
+        {{artist.biography}}
+      </div>
 
-  <div class="col-12 text-center mt-3" *ngFor="let concert of artist.concerts">
-    <b>Prochains concerts : {{concert.date}}</b>
-  </div>
+      <h3>Prochains concerts</h3>
+      <div class="col-4 offset-4 mt-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let concert of artist.concerts">
+            <b>{{concert.date}} à {{concert.time}}h</b>
+          </li>
+        </ul>
+      </div>
 
-  <a *ngIf="isConnected" class="btn btn-primary" routerLink="/artist-edit/{{artist.id}}">Modifier</a>
-</div>
+      <a *ngIf="isConnected" class="btn btn-primary" routerLink="/artist-edit/{{artist.id}}">Modifier</a>
+    </div>
+  </div>
 </ng-container>

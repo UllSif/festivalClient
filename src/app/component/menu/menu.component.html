@@ -1,4 +1,4 @@
-<nav class="nav nav-pills nav-justified mt-3 pb-md-4">
+<nav class="nav nav-pills nav-justified mb-4">
   <a class="nav-item nav-link" routerLink="/home"
      routerLinkActive="active">Accueil</a>
 
@@ -18,8 +18,8 @@
     <a class="nav-item nav-link" routerLink="/volunteer-list" routerLinkActive="active">Liste des bénévoles</a>
   </ng-container>
 
-  <ng-container *ngIf="isConnected && user">
-    <p class="nav-item nav-link">{{user.username}} est connecté</p>
+  <ng-container *ngIf="isConnected && currentUser">
+    <p class="nav-item nav-link">{{currentUser.username}} est connecté</p>
   </ng-container>
 
   <ng-container *ngIf="isConnected">
