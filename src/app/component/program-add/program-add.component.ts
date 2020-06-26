@@ -17,6 +17,8 @@ export class ProgramAddComponent implements OnInit {
 
   concert: Concert = new Concert();
   formSubmitted = false;
+  selectedTimeError = false;
+  selectedDurationError = false;
 
   artists: Artist[];
 
@@ -40,7 +42,19 @@ export class ProgramAddComponent implements OnInit {
     this.loadingService.showLoading();
     this.formSubmitted = true;
 
-    if (form.invalid) {
+    this.selectedDurationError = false;
+    this.selectedTimeError = false;
+
+    if (this.concert.time < '11:00' || this.concert.time > '23:00') {
+      this.selectedTimeError = true;
+    }
+
+    if (this.concert.duration < '00:30' || this.concert.duration > '02:00') {
+      this.selectedDurationError = true;
+    }
+
+    if (form.invalid || this.selectedTimeError || this.selectedDurationError) {
+      this.loadingService.hideLoading();
       return;
     }
 

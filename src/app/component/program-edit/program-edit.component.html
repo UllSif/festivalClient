@@ -27,6 +27,9 @@
         <input class="form-control" name="time" type="time"
                [(ngModel)]="concert.time" #timeInput="ngModel" required
                min="11:00" max="23:00">
+        <div *ngIf="selectedTimeError" class="text-danger">
+          L'heure doit être entre 11h00 et 23h00
+        </div>
       </div>
 
       <div class="form-group">
@@ -34,6 +37,9 @@
         <input class="form-control" name="duration" type="time"
                [(ngModel)]="concert.duration" #durationInput="ngModel" required
                min="00:30" max="02:00">
+        <div *ngIf="selectedDurationError" class="text-danger">
+          La durée d'un concert doit être entre 30 minutes et 2h00
+        </div>
       </div>
 
       <div class="form-group">
