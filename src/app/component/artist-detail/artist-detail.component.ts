@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ArtistService} from "../../service/artist.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Artist} from "../../entity/artist.entity";
 import {ConcertService} from "../../service/concert.service";
 import {SecurityService} from "../../service/security.service";
 import {LoadingService} from "../../service/loading.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-artist-detail',
@@ -20,7 +21,8 @@ export class ArtistDetailComponent implements OnInit {
               private concertService: ConcertService,
               private securityService: SecurityService,
               private route: ActivatedRoute,
-              private loadingService: LoadingService) {
+              private loadingService: LoadingService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -31,8 +33,17 @@ export class ArtistDetailComponent implements OnInit {
         this.loadingService.hideLoading();
       },
       error => {
-        console.error(error);
-        this.loadingService.hideLoading();
+        if (error.status == 404) {
+          console.error(error);
+          Swal.fire("Cet artiste est introuvable. Retour à la liste");
+          this.router.navigate(['/artist-list']);
+          this.loadingService.hideLoading();
+        } else {
+          console.error(error);
+          Swal.fire("Une erreur s'est produite. Retour à la liste.");
+          this.router.navigate(['/artist-list']);
+          this.loadingService.hideLoading();
+        }
       });
   }
 

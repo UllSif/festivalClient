@@ -28,10 +28,24 @@ export class ArtistEditComponent implements OnInit {
     this.loadingService.showLoading();
     this.artistId = this.route.snapshot.paramMap.get('id');
     this.artistService.getOneArtist(this.artistId).subscribe(value => {
-      this.artist = value;
-      this.loadingService.hideLoading();
-    });
+        this.artist = value;
+        this.loadingService.hideLoading();
+      },
+      error => {
+        if (error.status == 404) {
+          console.error(error);
+          Swal.fire("Cet artiste est introuvable. Retour à la liste");
+          this.router.navigate(['/artist-list']);
+          this.loadingService.hideLoading();
+        } else {
+          console.error(error);
+          Swal.fire("Une erreur s'est produite. Retour à la liste.");
+          this.router.navigate(['/artist-list']);
+          this.loadingService.hideLoading();
+        }
+      });
   }
+
 
   editArtist(form: NgForm) {
     this.loadingService.showLoading();
@@ -42,26 +56,46 @@ export class ArtistEditComponent implements OnInit {
     }
 
     this.artistService.editArtist(this.artistId, this.artist).subscribe(() => {
-      this.loadingService.hideLoading();
-      Swal.fire("L'artiste a bien été modifié. Retour à la liste");
-      this.router.navigate(['/artist-list']);
-    },
-      error => {
-        console.error(error);
         this.loadingService.hideLoading();
+        Swal.fire("L'artiste a bien été modifié. Retour à la liste");
+        this.router.navigate(['/artist-list']);
+      },
+      // Gestion d'erreur
+      error => {
+        if (error.status == 403) {
+          console.error(error);
+          Swal.fire('Vous ne disposez pas des accès pour modifier un artiste.');
+          this.router.navigate(['/artist-list']);
+          this.loadingService.hideLoading();
+        } else {
+          console.error(error);
+          Swal.fire("Une erreur s'est produite. Retour à la liste.");
+          this.router.navigate(['/artist-list']);
+          this.loadingService.hideLoading();
+        }
       });
   }
 
   deleteArtist() {
     this.loadingService.showLoading();
     this.artistService.deleteArtiste(this.artistId).subscribe(() => {
-      this.loadingService.hideLoading();
-      Swal.fire("L'artiste a bien été supprimé. Retour à la liste");
-      this.router.navigate(['/artist-list']);
-    },
-      error => {
-        console.error(error);
         this.loadingService.hideLoading();
+        Swal.fire("L'artiste a bien été supprimé. Retour à la liste");
+        this.router.navigate(['/artist-list']);
+      },
+      // Gestion d'erreur
+      error => {
+        if (error.status == 403) {
+          console.error(error);
+          Swal.fire('Vous ne disposez pas des accès pour supprimer un artiste.');
+          this.router.navigate(['/artist-list']);
+          this.loadingService.hideLoading();
+        } else {
+          console.error(error);
+          Swal.fire("Une erreur s'est produite. Retour à la liste.");
+          this.router.navigate(['/artist-list']);
+          this.loadingService.hideLoading();
+        }
       });
   }
 

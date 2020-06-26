@@ -7,7 +7,6 @@ import {ConcertService} from "../../service/concert.service";
 import {NgForm} from "@angular/forms";
 import Swal from "sweetalert2";
 import {LoadingService} from "../../service/loading.service";
-import {error} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-program-edit',
@@ -33,9 +32,23 @@ export class ProgramEditComponent implements OnInit {
     this.loadingService.showLoading();
     this.concertId = this.route.snapshot.paramMap.get('id');
     this.concertService.getOneConcert(this.concertId).subscribe(value => {
-      this.concert = value;
-      this.loadingService.hideLoading();
-    })
+        this.concert = value;
+        this.loadingService.hideLoading();
+      },
+      error => {
+        if (error.status == 404) {
+          console.error(error);
+          Swal.fire("Ce concert est introuvable. Retour au programme.");
+          this.router.navigate(['/program']);
+          this.loadingService.hideLoading();
+        } else {
+          console.error(error);
+          Swal.fire("Une erreur s'est produite. Retour au programme.");
+          this.router.navigate(['/program']);
+          this.loadingService.hideLoading();
+        }
+      });
+
     this.artistService.getAllArtist().subscribe(value =>
       this.artists = value);
   }
@@ -49,27 +62,47 @@ export class ProgramEditComponent implements OnInit {
     }
 
     this.concertService.editConcert(this.concertId, this.concert).subscribe(() => {
-      this.loadingService.hideLoading();
-      Swal.fire('Le concert a bien été modifié. Retour au programme');
-      this.router.navigate(['/program']);
-    },
-      error => {
-        console.error(error);
         this.loadingService.hideLoading();
+        Swal.fire('Le concert a bien été modifié. Retour au programme');
+        this.router.navigate(['/program']);
+      },
+      // Gestion des erreurs
+      error => {
+        if (error.status == 403) {
+          console.error(error);
+          Swal.fire('Vous ne disposez pas des accès pour modifier un concert.');
+          this.router.navigate(['/program']);
+          this.loadingService.hideLoading();
+        } else {
+          console.error(error);
+          Swal.fire("Une erreur s'est produite. Retour au programme");
+          this.router.navigate(['/program']);
+          this.loadingService.hideLoading();
+        }
       });
   }
 
   deleteConcert() {
     this.loadingService.showLoading();
     this.concertService.deleteConcert(this.concertId).subscribe(() => {
-      this.loadingService.hideLoading();
-      Swal.fire('Le concert a bien été supprimé. Retour au programme');
-      this.router.navigate(['/program']);
-    },
-        error => {
-      console.error(error);
-      this.loadingService.hideLoading();
-    });
+        this.loadingService.hideLoading();
+        Swal.fire('Le concert a bien été supprimé. Retour au programme');
+        this.router.navigate(['/program']);
+      },
+      // Gestion des erreurs
+      error => {
+        if (error.status == 403) {
+          console.error(error);
+          Swal.fire("Vous ne disposez pas des accès pour supprimer un concert.");
+          this.router.navigate(['/program']);
+          this.loadingService.hideLoading();
+        } else {
+          console.error(error);
+          Swal.fire("Une erreur s'est produite. Retour au programme");
+          this.router.navigate(['/program']);
+          this.loadingService.hideLoading();
+        }
+      });
   }
 
   get loading() {

@@ -28,7 +28,7 @@ export class ProgramAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.artistService.getAllArtist().subscribe(value => {
-        this.artists = value
+        this.artists = value;
       },
       error => {
         console.error(error);
@@ -50,8 +50,17 @@ export class ProgramAddComponent implements OnInit {
         this.router.navigate(['/program']);
       },
       error => {
-        console.error(error);
-        this.loadingService.hideLoading();
-      })
+        if (error.status == 403) {
+          console.error(error);
+          Swal.fire('Vous ne disposez pas des accès pour ajouter un concert.');
+          this.router.navigate(['/program']);
+          this.loadingService.hideLoading();
+        } else {
+          console.error(error);
+          Swal.fire("Une erreur s'est produite. Retour au programme");
+          this.router.navigate(['/program']);
+          this.loadingService.hideLoading();
+        }
+      });
   }
 }

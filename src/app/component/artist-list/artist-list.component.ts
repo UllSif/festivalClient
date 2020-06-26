@@ -3,6 +3,8 @@ import {ArtistService} from "../../service/artist.service";
 import {Artist} from "../../entity/artist.entity";
 import {SecurityService} from "../../service/security.service";
 import {LoadingService} from "../../service/loading.service";
+import Swal from "sweetalert2";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-artist-list',
@@ -15,7 +17,8 @@ export class ArtistListComponent implements OnInit {
 
   constructor(private artistService: ArtistService,
               private securityService: SecurityService,
-              private loadingService:LoadingService) {
+              private loadingService:LoadingService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -26,6 +29,8 @@ export class ArtistListComponent implements OnInit {
     },
       error => {
         console.error(error);
+        Swal.fire("Une erreur est survenue. Retour à l'accueil");
+        this.router.navigate(['/home']);
         this.loadingService.hideLoading();
       });
   }

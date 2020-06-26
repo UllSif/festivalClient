@@ -3,6 +3,8 @@ import {ConcertService} from "../../service/concert.service";
 import {Concert} from "../../entity/concert.entity";
 import {SecurityService} from "../../service/security.service";
 import {LoadingService} from "../../service/loading.service";
+import Swal from "sweetalert2";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-program',
@@ -15,7 +17,8 @@ export class ProgramComponent implements OnInit {
 
   constructor(private concertService: ConcertService,
               private securityService: SecurityService,
-              private loadingService: LoadingService) {
+              private loadingService: LoadingService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -26,6 +29,8 @@ export class ProgramComponent implements OnInit {
     },
       error => {
         console.error(error);
+        Swal.fire("Une erreur est survenue. Retour à l'accueil");
+        this.router.navigate(['/home']);
         this.loadingService.hideLoading();
       });
   }

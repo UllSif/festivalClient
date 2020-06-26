@@ -38,6 +38,7 @@ export class RegisterComponent implements OnInit {
       },
       error => {
         console.error(error);
+        Swal.fire('Une erreur est survenue. Veuillez recommencer');
         this.loadingService.hideLoading();
       });
   }
