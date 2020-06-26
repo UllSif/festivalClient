@@ -37,7 +37,7 @@ export class ProgramEditComponent implements OnInit {
       this.loadingService.hideLoading();
     })
     this.artistService.getAllArtist().subscribe(value =>
-      this.artists = value)
+      this.artists = value);
   }
 
   editConcert(form: NgForm) {
@@ -54,9 +54,9 @@ export class ProgramEditComponent implements OnInit {
       this.router.navigate(['/program']);
     },
       error => {
-        console.error(error)
+        console.error(error);
         this.loadingService.hideLoading();
-      })
+      });
   }
 
   deleteConcert() {
@@ -67,9 +67,9 @@ export class ProgramEditComponent implements OnInit {
       this.router.navigate(['/program']);
     },
         error => {
-      console.error(error)
+      console.error(error);
       this.loadingService.hideLoading();
-    })
+    });
   }
 
   get loading() {

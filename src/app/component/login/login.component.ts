@@ -34,10 +34,11 @@ export class LoginComponent implements OnInit {
 
     this.securityService.login(this.username, this.password).subscribe(() => {
       this.loadingService.hideLoading();
-        this.router.navigate(['/home'])
+        this.router.navigate(['/home']);
       },
       error => {
         this.errorMessage = 'Identifiants incorrects';
+          this.loadingService.hideLoading();
       });
   }
 }

@@ -27,7 +27,7 @@ export class ProgramComponent implements OnInit {
       error => {
         console.error(error);
         this.loadingService.hideLoading();
-      })
+      });
   }
 
   get isConnected() {

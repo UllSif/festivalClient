@@ -15,12 +15,12 @@ export class MenuComponent implements OnInit {
   constructor(private securityService: SecurityService, private router: Router) { }
 
   ngOnInit(): void {
-    this.securityService.restoreConnection()
+    this.securityService.restoreConnection();
     this.user = this.securityService.getCurrentUser();
   }
 
   get isConnected() {
-    return this.securityService.isConnected()
+    return this.securityService.isConnected();
   }
 
   logOut() {

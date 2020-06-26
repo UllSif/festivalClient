@@ -47,7 +47,7 @@ export class ProgramAddComponent implements OnInit {
     this.concertService.addConcert(this.concert).subscribe(() => {
         this.loadingService.hideLoading();
         Swal.fire('Le concert a bien été créé. Retour au programme');
-        this.router.navigate(['/program'])
+        this.router.navigate(['/program']);
       },
       error => {
         console.error(error);

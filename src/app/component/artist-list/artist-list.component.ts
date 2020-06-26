@@ -21,19 +21,19 @@ export class ArtistListComponent implements OnInit {
   ngOnInit(): void {
     this.loadingService.showLoading();
     this.artistService.getAllArtist().subscribe(value => {
-      this.artists = value
+      this.artists = value;
       this.loadingService.hideLoading();
     },
       error => {
         console.error(error);
         this.loadingService.hideLoading();
-      })
+      });
   }
 
   sortArtists() {
     return this.artists.sort((a, b) => {
       return a.name.localeCompare(b.name);
-    })
+    });
   }
 
   get isConnected() {

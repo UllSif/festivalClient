@@ -25,7 +25,7 @@ export class ArtistAddComponent implements OnInit {
   }
 
   addArtist(form: NgForm) {
-    this.loadingService.showLoading()
+    this.loadingService.showLoading();
     this.formSubmitted = true;
 
     if (form.invalid) {
@@ -36,6 +36,10 @@ export class ArtistAddComponent implements OnInit {
       this.loadingService.hideLoading();
       Swal.fire("L'artiste a bien été ajouté. Retour à la liste");
       this.router.navigate(['/artist-list']);
-    })
+    },
+      error => {
+        console.error(error);
+        this.loadingService.hideLoading();
+      });
   }
 }

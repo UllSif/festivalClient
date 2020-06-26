@@ -28,16 +28,16 @@ export class ArtistDetailComponent implements OnInit {
     this.artistId = this.route.snapshot.paramMap.get('id');
     this.artistService.getOneArtist(this.artistId).subscribe(value => {
         this.artist = value;
-        this.loadingService.hideLoading()
+        this.loadingService.hideLoading();
       },
       error => {
         console.error(error);
         this.loadingService.hideLoading();
-      })
+      });
   }
 
   get isConnected() {
-    return this.securityService.isConnected()
+    return this.securityService.isConnected();
   }
 
   get loading() {

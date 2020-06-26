@@ -30,7 +30,7 @@ export class ArtistEditComponent implements OnInit {
     this.artistService.getOneArtist(this.artistId).subscribe(value => {
       this.artist = value;
       this.loadingService.hideLoading();
-    })
+    });
   }
 
   editArtist(form: NgForm) {
@@ -49,7 +49,7 @@ export class ArtistEditComponent implements OnInit {
       error => {
         console.error(error);
         this.loadingService.hideLoading();
-      })
+      });
   }
 
   deleteArtist() {
@@ -62,7 +62,7 @@ export class ArtistEditComponent implements OnInit {
       error => {
         console.error(error);
         this.loadingService.hideLoading();
-      })
+      });
   }
 
   get loading() {

@@ -25,7 +25,7 @@ export class VolunteerListComponent implements OnInit {
       error => {
         console.error(error);
         this.loadingService.hideLoading();
-      })
+      });
   }
 
   get loading() {

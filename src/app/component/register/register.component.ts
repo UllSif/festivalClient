@@ -13,7 +13,7 @@ import {LoadingService} from "../../service/loading.service";
 })
 export class RegisterComponent implements OnInit {
 
-  user: User = new User()
+  user: User = new User();
 
   formSubmitted = false;
 
@@ -39,6 +39,6 @@ export class RegisterComponent implements OnInit {
       error => {
         console.error(error);
         this.loadingService.hideLoading();
-      })
+      });
   }
 }
